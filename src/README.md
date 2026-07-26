@@ -1,24 +1,24 @@
 # rustdoc-assist (lowkey trying to learn rust)
 
-Honestly, I am just trying to build a rag tool that lets me talk to the rust documentation because i am trying to learn intermediate systems programming and eventually get a google internship. python is cool but rust is built different is a different beast and from my experiance the docs are the best way to learn it.
+Honestly, I am just trying to build a RAG tool that lets me talk to the Rust documentation because I am trying to learn intermediate systems programming and eventually get a Google internship. Python is cool, but Rust is built different—it's a whole beast, and from my experience the docs are the best way to learn it.
 
 ## current status
 
-Right now it's super basic. I don't know how to read real files yet or do actual vector embeddings, so i literally just hardcoded a fake database inside the code to see if the search logic works.
+Right now it's an offline CLI assistant! It doesn't need any API keys or internet, so anyone who clones it can just run it instantly. I added basic fuzzy matching so typos like `concurrancy` or queries like `what is 1.1` don't break it, and it gives you direct links to doc.rust-lang.org.
 
-P.S: it kinda works so I did something right ig.
+P.S: it actually works now so I did something right ig 💀
 
-## how it works (i think)
+## how it works
 
-1. **mock_ingest**: gives us some fake text about ownership to play with.
-2. **LocalStore**: a basic struct holding our data array. it has a `simple_search` method that just checks if the text contains the word you searched for.
-3. **get_answer**: this is where the gemini api will go eventually. right now it just returns a fake string placeholder.
-4. **main**: kicks off the tokio async runtime and prints out the final answer to the screen.
+- **seed docs:** just a basic array inside the code holding text from important Rust Book chapters (ownership, structs, traits, async/tokio, error handling).
+- **search logic:** strips out filler words, parses section numbers, and uses basic edit distance so small typos still match the right chapter.
+- **text output:** strings together a local explanation and prints the exact doc URL without calling external services.
+- **tokio runtime:** handles terminal input asynchronously so it stays snappy.
 
-## todo list
+## how to run
 
-- [ ] figure out how to actually parse the rust book markdown files
-- [ ] hook up the real gemini api so it stops giving dummy answers
-- [ ] figure out vector embeddings because simple text matching is not it long-term
-
-If it crashes, don't mind it plz
+```bash
+git clone [https://github.com/Raushan-tryingtocode/rustdoc-assist.git](https://github.com/Raushan-tryingtocode/rustdoc-assist.git)
+cd rustdoc-assist
+cargo run
+```

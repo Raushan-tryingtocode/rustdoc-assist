@@ -1,8 +1,10 @@
 [package]
-name = "RustDoc_assist"
+name = "rustdoc_assist"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
-anyhow = "1.0.103"
-tokio = { version = "1.52.3", features = ["full"] }
+anyhow = "1.0"
+reqwest = { version = "0.12", features = ["json"] }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }
