@@ -5,6 +5,10 @@ built to learn real vector search and local ML inference in Rust, scoped to
 match what I actually understand deeply rather than what sounds most
 impressive.
 
+# Project Demo
+
+<video src="assets/Project_Demo.mp4?raw=true" controls width="100%"></video>
+
 ## What this does
 
 - Fetches real chapters from [rust-lang/book](https://github.com/rust-lang/book)
