@@ -1,4 +1,6 @@
 /target
 
 
-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
+echo ".fastembed_cache/" >> .gitignore
+echo "docs_cache/" >> .gitignore
+echo "target/" >> .gitignore
