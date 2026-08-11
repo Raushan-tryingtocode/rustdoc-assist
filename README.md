@@ -77,3 +77,7 @@ replaces that with real local embeddings, real cosine similarity vector
 search, and a real corpus fetched from source. An async REST API version
 (Tokio + Axum) is in progress in a separate branch as I get more comfortable
 with async Rust — I'd rather build that depth for real than bolt it on early.
+
+## Contributing
+
+Feel free to open an issue or submit a pull request if you run into bugs or have suggestions.
