@@ -1,4 +1,4 @@
-# rustdoc-assist
+# Rustdoc-assist
 
 A local RAG (retrieval-augmented generation) CLI for querying the Rust Book —
 built to learn real vector search and local ML inference in Rust, scoped to
