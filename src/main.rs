@@ -2,15 +2,13 @@
 //!
 //! Loads cached document chunks from the Official Rust Book, generates 
 //! local 384-dimensional embeddings, and executes vector similarity search in an 
-//! interactive terminal loop.
+//! interactive terminal loop
 
-mod corpus;
-mod embeddings;
-mod search;
+use rustdoc_assist::corpus;
+use rustdoc_assist::embeddings::Embedder;
+use rustdoc_assist::search::VectorIndex;
 
 use anyhow::Result;
-use embeddings::Embedder;
-use search::VectorIndex;
 use std::io::{self, Write};
 use std::path::Path;
 use std::time::Instant;
