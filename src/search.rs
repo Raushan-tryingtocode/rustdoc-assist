@@ -44,8 +44,12 @@ impl VectorIndex {
             })
             .collect();
 
-        scored.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap());
+        scored.sort_by(|a, b| b.score.total_cmp(&a.score));
         scored.truncate(k);
         scored
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.chunks.is_empty()
     }
 }

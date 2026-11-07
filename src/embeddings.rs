@@ -24,7 +24,7 @@ impl Embedder {
     pub fn embed_batch(&mut self, texts: &[String]) -> Result<Vec<Vec<f32>>> {
         let embeddings = self
             .model
-            .embed(texts.to_vec(), None)
+            .embed(texts, None)
             .context("Batch inference failed")?;
         Ok(embeddings)
     }

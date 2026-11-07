@@ -1,7 +1,7 @@
 //! Interactive CLI for querying the local Rustdoc RAG index.
 //!
-//! Loads cached document chunks from the Official Rust Book, generates 
-//! local 384-dimensional embeddings, and executes vector similarity search in an 
+//! Loads cached document chunks from the Official Rust Book, generates
+//! local 384-dimensional embeddings, and executes vector similarity search in an
 //! interactive terminal loop
 
 use rustdoc_assist::corpus;
@@ -13,7 +13,7 @@ use std::io::{self, Write};
 use std::path::Path;
 use std::time::Instant;
 
-fn build_index() -> Result<VectorIndex> {
+fn build_index(embedder: &mut Embedder) -> Result<VectorIndex> {
     let cache_path = Path::new("docs_cache/corpus.json");
     let chunks = corpus::load_corpus(cache_path)?;
 
@@ -21,7 +21,6 @@ fn build_index() -> Result<VectorIndex> {
     let start = Instant::now();
 
     let texts: Vec<String> = chunks.iter().map(|c| c.text.clone()).collect();
-    let mut embedder = Embedder::new()?;
     let vectors = embedder.embed_batch(&texts)?;
 
     let elapsed = start.elapsed();
@@ -36,16 +35,18 @@ fn build_index() -> Result<VectorIndex> {
 }
 
 fn main() -> Result<()> {
-    let index = build_index()?;
-    println!("Index ready with {} chunks.", index.len());
     let mut embedder = Embedder::new()?;
+    let index = build_index(&mut embedder)?;
+    println!("Index ready with {} chunks.", index.len());
 
     println!("\nType a query or 'exit' to quit.\n");
     loop {
         print!("query> ");
         io::stdout().flush()?;
         let mut line = String::new();
-        io::stdin().read_line(&mut line)?;
+        if io::stdin().read_line(&mut line)? == 0 {
+            break; // EOF (Ctrl-D)
+        }
         let line = line.trim();
 
         if line.is_empty() {

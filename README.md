@@ -55,7 +55,7 @@ building toward — but I'd rather ship a smaller version I fully understand
 than a bigger one I can't yet explain end to end.
 
 **Why brute-force cosine search instead of an ANN index?** At the current
-corpus size (a few dozen chunks across 12 chapters), scanning every vector
+corpus size (16 chunks across 12 chapters), scanning every vector
 per query is O(n) and genuinely fast — an ANN index (e.g. HNSW) would add
 complexity with no measurable benefit here. Documenting that tradeoff here
 instead of over-engineering it is deliberate.
@@ -66,7 +66,7 @@ instead of over-engineering it is deliberate.
 - **Indexing time:** ~1.15s (one-time embedding of full corpus on startup)
 - **Vector search only:** 8.23µs median (Criterion, 100 samples, `cargo bench`) — brute-force cosine similarity over 16 vectors
 - **End-to-end query (embed + search):** ~4–8ms — dominated by ONNX query embedding, not search
-- **Hardware:** 13th Gen Intel Core i7-13700H, 16 GB RAMs
+- **Hardware:** 13th Gen Intel Core i7-13700H, 16 GB RAM
 
 ## What changed from the first version
 
@@ -74,8 +74,8 @@ The original version was a keyword-matching CLI (tokenize + Levenshtein
 fuzzy match against a hardcoded array of 12 doc snippets). This version
 replaces that with real local embeddings, real cosine similarity vector
 search, and a real corpus fetched from source. An async REST API version
-(Tokio + Axum) is in progress in a separate branch as I get more comfortable
-with async Rust — I'd rather build that depth for real than bolt it on early.
+(Tokio + Axum) is planned to be added as I get more comfortable with
+async Rust — I'd rather build that depth for real.
 
 ## Contributing
 

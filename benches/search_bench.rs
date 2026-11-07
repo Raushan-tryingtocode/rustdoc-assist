@@ -1,8 +1,8 @@
 use criterion::{criterion_group, criterion_main, Criterion};
-use std::hint::black_box;
 use rustdoc_assist::corpus;
 use rustdoc_assist::embeddings::Embedder;
 use rustdoc_assist::search::VectorIndex;
+use std::hint::black_box;
 use std::path::Path;
 
 fn bench_search(c: &mut Criterion) {
