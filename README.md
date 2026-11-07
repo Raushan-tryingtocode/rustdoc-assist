@@ -64,7 +64,7 @@ instead of over-engineering it is deliberate.
 
 - **Corpus size:** 16 chunks across 12 Rust Book chapters
 - **Indexing time:** ~1.15s (one-time embedding of full corpus on startup)
-- **Vector search only:** 8.23µs median (Criterion, 100 samples, `cargo bench`) — brute-force cosine similarity over 16 vectors
+- **Vector search only:** ~8 µs per query (Criterion, 100 samples, `cargo bench`) — brute-force cosine similarity over 16 vectors
 - **End-to-end query (embed + search):** ~4–8ms — dominated by ONNX query embedding, not search
 - **Hardware:** 13th Gen Intel Core i7-13700H, 16 GB RAM
 
